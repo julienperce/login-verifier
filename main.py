@@ -3,11 +3,13 @@ import sys
 
 readEntries = open("entries.txt")
 entriesFile = open("entries.txt", "r+")
+adminEntriesFile = open("adminPasswords.txt", "r+")
 
+ 
 def amtRegUsers():
     numLines = 0
     return len(open("entries.txt").readlines())
-print(f"there are currently {amtRegUsers()} users registered.")
+
 a = int(input("Select your action: 1 to register; 2 to login"))
 
 
@@ -20,15 +22,28 @@ def regNewUser():
 def loginExistingUser():
     loginUser = input("Enter username: ")
     loginPass = input("Enter password: ")
-    for line in entriesFile:
-        valueSplit = line.split(":")
-        loggedUser = valueSplit[0]
-        loggedPass = valueSplit[1]
-        if loginUser == loggedUser and loginPass == loggedPass:
-            print("succesful")
-        else:
-            print("failure")
+    
+    def loginNonAdmin():
+        for line in entriesFile:
+            valueSplit = line.split(":")
+            loggedUser = valueSplit[0]
+            loggedPass = valueSplit[1]
+            if loginUser == loggedUser and loginPass == loggedPass:
+                print("succesful")
+    
+    def loginAdmin():
+        for line in adminEntriesFile:
+            valueSplit = line.split(":")
+            loggedUser = valueSplit[0]
+            loggedPass = valueSplit[1]
+            if loginUser == loggedUser and loginPass == loggedPass:
+                print("succesful admin login")
 
+    if loginUser == "admin":
+        loginAdmin()
+    else:
+        loginNonAdmin()
+    
 if a == 1:
     regNewUser()
 
@@ -40,3 +55,7 @@ elif a == 2:
 else:
     print("wrong value")
     sys.exit(0)
+    
+entriesFile.close()
+
+
