@@ -1,14 +1,14 @@
 import os
 import sys
 
-readEntries = open("entries.txt")
-entriesFile = open("entries.txt", "r+")
-adminEntriesFile = open("adminPasswords.txt", "r+")
+readEntries = open(".txt/entries.txt")
+entriesFile = open(".txt/entries.txt", "r+")
+adminEntriesFile = open(".txt/adminPasswords.txt", "r+")
 
  
 def amtRegUsers():
     numLines = 0
-    return len(open("entries.txt").readlines())
+    return len(open(".txt/entries.txt").readlines())
 
 a = int(input("Select your action: 1 to register; 2 to login"))
 
@@ -48,7 +48,7 @@ if a == 1:
     regNewUser()
 
 elif a == 2:
-    if os.stat("entries.txt").st_size == 0:
+    if os.stat(".txt/entries.txt").st_size == 0:
         print("Error: there are no registered users")
         sys.exit(0) # we pass the arg 0 to make sure it is a "successful termination"; and to not raise an exception
     loginExistingUser()
