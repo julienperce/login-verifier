@@ -6,7 +6,7 @@ app = Flask(__name__, template_folder="../templates") # we put 2 dots to search 
 def homepage():
     return render_template("index.html")
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/login", methods=["POST", "GET"])
 def loginPage():
     return render_template("login.html")
 
